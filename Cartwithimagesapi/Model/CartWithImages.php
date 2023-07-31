@@ -74,13 +74,14 @@ class CartWithImages implements CartWithImagesInterface
     {
         try {
             // Use ProductRepositoryInterface to get the product with media gallery entries
+            $baseImageUrl = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
             $product = $this->productRepository->getById($productId);
             $mediaGalleryEntries = $product->getMediaGalleryEntries();
 
             // Check if there are media gallery entries for the product
             if (!empty($mediaGalleryEntries)) {
                 // Get the first media gallery entry URL
-                $productImage = reset($mediaGalleryEntries)->getFile();
+                $productImage = $baseImageUrl . reset($mediaGalleryEntries)->getFile();
                 return $productImage;
             }
         } catch (\Exception $e) {
