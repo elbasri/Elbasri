@@ -81,7 +81,7 @@ class CartWithImages implements CartWithImagesInterface
             // Check if there are media gallery entries for the product
             if (!empty($mediaGalleryEntries)) {
                 // Get the first media gallery entry URL
-                $productImage = $baseImageUrl . reset($mediaGalleryEntries)->getFile();
+                $productImage = $baseImageUrl . "catalog/product". reset($mediaGalleryEntries)->getFile();
                 return $productImage;
             }
         } catch (\Exception $e) {
