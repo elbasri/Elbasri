@@ -4,26 +4,26 @@ namespace Elbasri\Cartwithimagesapi\Model;
 
 use Elbasri\Cartwithimagesapi\Api\CartWithImagesInterface;
 use Magento\Quote\Model\QuoteRepository;
-use Magento\Store\Model\StoreManagerInterface;
+use Psr\Log\LoggerInterface;
 
 class CartWithImages implements CartWithImagesInterface
 {
     /**
-     * @var QuoteRepository
+     * @var \Magento\Quote\Model\QuoteRepository
      */
     protected $quoteRepository;
 
     /**
-     * @var StoreManagerInterface
+     * @var \Psr\Log\LoggerInterface
      */
-    protected $storeManager;
+    protected $logger;
 
     public function __construct(
         QuoteRepository $quoteRepository,
-        StoreManagerInterface $storeManager
+        LoggerInterface $logger // Add this line to inject the logger
     ) {
         $this->quoteRepository = $quoteRepository;
-        $this->storeManager = $storeManager;
+        $this->logger = $logger; // Assign the injected logger to the class property
     }
     /**
      * @inheritDoc
