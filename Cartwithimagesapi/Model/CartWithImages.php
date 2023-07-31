@@ -38,10 +38,14 @@ class CartWithImages implements CartWithImagesInterface
         $cartItems = [];
         foreach ($cart->getAllVisibleItems() as $item) {
             $product = $item->getProduct();
-            $productImage = $product->getMediaGalleryEntries()[0]['file'] ?? null;
-
-            // Construct the full image URL using the base URL and relative path
-            $fullImageUrl = $baseImageUrl . $productImage;
+            $productImage = $product->getMediaGalleryEntries();
+            $productImageUrl = null;
+            foreach ($productImage as $image) {
+                if ($image['media_type'] === 'image') {
+                    $productImageUrl = $baseImageUrl . 'catalog/product' . $image['file'];
+                    break;
+                }
+            }
 
             // Add the necessary cart item data along with the full product image URL
             $cartItems[] = [
@@ -50,7 +54,7 @@ class CartWithImages implements CartWithImagesInterface
                 'name' => $item->getName(),
                 'price' => $item->getPrice(),
                 'quantity' => $item->getQty(),
-                'product_image' => $fullImageUrl,
+                'product_image' => $productImageUrl,
                 'product_type' => $product->getTypeId(),
                 'quote_id' => $cart->getId()
             ];
