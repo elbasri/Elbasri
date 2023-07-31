@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/system_file.xsd">
+    <system>
+		<tab id="elbasri" translate="label" sortOrder="100" class="elbasri-logo">
+			<label><![CDATA[]]></label>
+		</tab>
+        <section id="gold" showInDefault="1" sortOrder="1">
+			 <tab>elbasri</tab>
+             <label>Gold Product Grams</label>
+          	 <resource>Elbasri_Gold::gold</resource>
+			 <group id="moduleoption" showInDefault="1" sortOrder="1">
+					<label>Configuration</label>
+					<field id="enable" type="select" showInDefault="1" 
+							sortOrder="0" showInWebsite="1" showInStore="1">
+						<label>Gold Product Grams</label>
+						<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+				   </field>
+			 </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,27 @@
+{
+  "name": "elbasri/mediamanager",
+  "version": "1.0.0",
+  "description": "Manage and edit images and other media in magento",
+  "type": "magento2-module",
+  "keywords": ["magento 2, media, media manager"],
+  "homepage": "https://www.elbasri.net",
+  "support": {
+    "docs": "https://www.elbasri.net"
+  },
+  "license": "GPL3",
+  "authors": [
+    {
+      "name": "Elbasri Abdennacer",
+      "email": "contact@elbasri.net",
+      "homepage": "https://elbasri.net"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "src/registration.php"
+    ],
+    "psr-4": {
+      "Elbasri\\MediaManager\\": "src\\"
+    }
+  }
+}

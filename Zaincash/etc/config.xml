@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+* elbasri_zaincash default configuration
+*
+* @category    Payfort
+* @package     elbasri_zaincash
+* @developer	Elbasri.net
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <elbasri_zaincash>
+                <model>Elbasri\Zaincash\Model\Payment</model>
+                <!--<title>Credit / Debit Card</title>
+                <active>0</active>
+                <order_status>pending</order_status>-->
+                <sha_type>SHA-128</sha_type>
+                <language>store</language>
+                <payment_action>sale</payment_action>
+                <allowspecific>0</allowspecific>
+                <min_order_total>0</min_order_total>
+                <order_status>zaincash_new</order_status>
+                <order_status_on_fail>zaincash_failed</order_status_on_fail>
+                <gateway_currency>base</gateway_currency>
+                <group>elbasri_zaincash</group>
+            </elbasri_zaincash>
+           
+        </payment>
+    </default>
+</config>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Catalog/etc/product_types.xsd">
+    <type name="elbasri_gold" label="Gold Product" modelInstance="Elbasri\Gold\Model\Product\Type\Goldtype" indexPriority="25" sortOrder="25" isQty="true">
+        <customAttributes>
+            <attribute name="default" value="true"/>
+        </customAttributes>
+    </type>
+</config>
