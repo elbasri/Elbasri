@@ -25,8 +25,7 @@ class CartWithImages implements CartWithImagesInterface
         $this->quoteRepository = $quoteRepository;
         $this->storeManager = $storeManager;
     }
-
-    /**
+    /*
      * @inheritDoc
      */
     public function getCartWithImages($customerId)
@@ -40,11 +39,17 @@ class CartWithImages implements CartWithImagesInterface
             $product = $item->getProduct();
             $productImage = $product->getMediaGalleryEntries();
             $productImageUrl = null;
-            foreach ($productImage as $image) {
-                if ($image['media_type'] === 'image') {
-                    $productImageUrl = $baseImageUrl . 'catalog/product' . $image['file'];
-                    break;
+
+            if ($productImage) {
+                foreach ($productImage as $image) {
+                    if ($image['media_type'] === 'image') {
+                        $productImageUrl = $baseImageUrl . 'catalog/product' . $image['file'];
+                        break;
+                    }
                 }
+            } else {
+                // Use a default image URL when no product images are available
+                $productImageUrl = $baseImageUrl . 'placeholder/default.jpg';
             }
 
             // Add the necessary cart item data along with the full product image URL
@@ -62,4 +67,5 @@ class CartWithImages implements CartWithImagesInterface
 
         return $cartItems;
     }
+
 }
