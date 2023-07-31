@@ -2,28 +2,20 @@
 
 namespace Elbasri\Cartwithimagesapi\Model;
 
-use Elbasri\Cartwithimagesapi\Api\CartWithImagesInterface;
 use Magento\Quote\Model\QuoteRepository;
-use Magento\Store\Model\StoreManagerInterface;
+use Elbasri\Cartwithimagesapi\Api\CartWithImagesInterface;
 
 class CartWithImages implements CartWithImagesInterface
 {
     /**
-     * @var \Magento\Quote\Model\QuoteRepository
+     * @var QuoteRepository
      */
     protected $quoteRepository;
 
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $storeManager;
-
     public function __construct(
-        QuoteRepository $quoteRepository,
-        StoreManagerInterface $storeManager
+        QuoteRepository $quoteRepository
     ) {
         $this->quoteRepository = $quoteRepository;
-        $this->storeManager = $storeManager;
     }
 
     /**
@@ -36,10 +28,8 @@ class CartWithImages implements CartWithImagesInterface
         $cartItems = [];
         foreach ($cart->getAllVisibleItems() as $item) {
             $product = $item->getProduct();
-            $productImage = $this->storeManager
-                ->getStore()
-                ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
-            
+            $productImage = $product->getImage();
+
             // Add the necessary cart item data along with the product image
             $cartItems[] = [
                 'item_id' => $item->getId(),
