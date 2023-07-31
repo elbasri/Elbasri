@@ -20,10 +20,12 @@ class CartWithImages implements CartWithImagesInterface
 
     public function __construct(
         QuoteRepository $quoteRepository,
-        LoggerInterface $logger // Add this line to inject the logger
+        LoggerInterface $logger, // Add this line to inject the logger
+        StoreManagerInterface $storeManager
     ) {
         $this->quoteRepository = $quoteRepository;
         $this->logger = $logger; // Assign the injected logger to the class property
+        $this->storeManager = $storeManager; 
     }
     /**
      * @inheritDoc
