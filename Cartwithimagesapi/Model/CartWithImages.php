@@ -5,6 +5,7 @@ namespace Elbasri\Cartwithimagesapi\Model;
 use Elbasri\Cartwithimagesapi\Api\CartWithImagesInterface;
 use Magento\Quote\Model\QuoteRepository;
 use Psr\Log\LoggerInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
 class CartWithImages implements CartWithImagesInterface
 {
