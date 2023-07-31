@@ -25,7 +25,7 @@ class CartWithImages implements CartWithImagesInterface
         $this->quoteRepository = $quoteRepository;
         $this->storeManager = $storeManager;
     }
-    /*
+    /**
      * @inheritDoc
      */
     public function getCartWithImages($customerId)
@@ -51,6 +51,11 @@ class CartWithImages implements CartWithImagesInterface
                 // Use a default image URL when no product images are available
                 $productImageUrl = $baseImageUrl . 'placeholder/default.jpg';
             }
+
+            // Log information to debug
+            $this->logger->debug('Product ID: ' . $product->getId());
+            $this->logger->debug('Product Name: ' . $product->getName());
+            $this->logger->debug('Product Image: ' . $productImageUrl);
 
             // Add the necessary cart item data along with the full product image URL
             $cartItems[] = [
