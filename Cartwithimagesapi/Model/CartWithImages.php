@@ -29,6 +29,7 @@ class CartWithImages implements CartWithImagesInterface
         foreach ($cart->getAllVisibleItems() as $item) {
             $product = $item->getProduct();
             $productImage = $product->getImage();
+            $productId = $product->getId();
 
             // Add the necessary cart item data along with the product image
             $cartItems[] = [
@@ -38,6 +39,7 @@ class CartWithImages implements CartWithImagesInterface
                 'price' => $item->getPrice(),
                 'quantity' => $item->getQty(),
                 'product_image' => $productImage,
+                'productId' => $productId,
                 'product_type' => $product->getTypeId(),
                 'quote_id' => $cart->getId()
             ];
