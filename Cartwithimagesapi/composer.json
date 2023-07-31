@@ -1,0 +1,16 @@
+{
+    "name": "elbasri/cartwithimagesapi",
+    "description": "الحصول على صورة المنتجات إضافة لبيانات أخرى مفصلة في السلة عبر واجهة برمجة التطبيقات",
+    "require": {
+        "php": "^7.2.0",
+        "magento/module-quote": "^101.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "OSL-3.0",
+    "autoload": {
+        "psr-4": {
+            "Elbasri\\Cartwithimagesapi\\": ""
+        }
+    }
+}
