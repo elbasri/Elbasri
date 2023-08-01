@@ -204,22 +204,20 @@ class CartWithImages implements CartWithImagesInterface
      */
     private function getConfigurableOptions($product, $item)
     {
-        if ($product->getTypeId() !== 'configurable') {
-            return [];
-        }
-
         $configurableOptions = [];
-        $productOptions = $item->getProductOptions();
-        if (isset($productOptions['info_buyRequest']['super_attribute'])) {
-            $superAttributes = $productOptions['info_buyRequest']['super_attribute'];
-            foreach ($superAttributes as $optionId => $optionValue) {
-                $configurableOptions[] = [
-                    'option_id' => $optionId,
-                    'option_value' => $optionValue
-                ];
+    
+        if ($product->getTypeId() === \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
+            $productOptions = $item->getBuyRequest()->getData('super_attribute');
+            if (!empty($productOptions)) {
+                foreach ($productOptions as $optionId => $optionValue) {
+                    $configurableOptions[] = [
+                        'option_id' => $optionId,
+                        'option_value' => $optionValue
+                    ];
+                }
             }
         }
-
+    
         return $configurableOptions;
     }
 }
