@@ -53,9 +53,9 @@ class CartWithImages implements CartWithImagesInterface
         foreach ($cart->getAllVisibleItems() as $item) {
             $product = $item->getProduct();
             $productImage = $this->getProductImage($product->getId());
-
+    
             // Add the necessary cart item data along with the product image
-            $cartItems[] = [
+            $cartItemData = [
                 'item_id' => $item->getId(),
                 'sku' => $item->getSku(),
                 'name' => $item->getName(),
@@ -65,6 +65,18 @@ class CartWithImages implements CartWithImagesInterface
                 'product_type' => $product->getTypeId(),
                 'quote_id' => $cart->getId()
             ];
+    
+            // Get configurable options for configurable product
+            $configurableOptions = $this->getConfigurableOptions($product, $item);
+            if (!empty($configurableOptions)) {
+                $cartItemData['product_option'] = [
+                    'extension_attributes' => [
+                        'configurable_item_options' => $configurableOptions
+                    ]
+                ];
+            }
+    
+            $cartItems[] = $cartItemData;
         }
 
         // Get additional cart and customer data
@@ -182,5 +194,32 @@ class CartWithImages implements CartWithImagesInterface
         ];
 
         return $currencyData;
+    }
+       /**
+     * Get configurable options for a configurable product
+     *
+     * @param \Magento\Catalog\Model\Product $product
+     * @param \Magento\Quote\Model\Quote\Item $item
+     * @return array
+     */
+    private function getConfigurableOptions($product, $item)
+    {
+        if ($product->getTypeId() !== 'configurable') {
+            return [];
+        }
+
+        $configurableOptions = [];
+        $productOptions = $item->getProductOptions();
+        if (isset($productOptions['info_buyRequest']['super_attribute'])) {
+            $superAttributes = $productOptions['info_buyRequest']['super_attribute'];
+            foreach ($superAttributes as $optionId => $optionValue) {
+                $configurableOptions[] = [
+                    'option_id' => $optionId,
+                    'option_value' => $optionValue
+                ];
+            }
+        }
+
+        return $configurableOptions;
     }
 }
