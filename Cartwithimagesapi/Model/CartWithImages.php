@@ -156,9 +156,9 @@ class CartWithImages implements CartWithImagesInterface
         if (!$address) {
             return [];
         }
-
-        // Convert address data to array
-        $addressData = $address->__toArray();
+    
+        // Use getData() to get the address data as an array
+        $addressData = $address->getData();
         return $addressData;
     }
 
